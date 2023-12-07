@@ -1,7 +1,7 @@
 import 'package:firebase/controller/data_provider.dart';
 import 'package:firebase/controller/firebase_provider.dart';
-import 'package:firebase/firebase_options.dart';
-import 'package:firebase/home.dart';
+import 'package:firebase/service/firebase_options.dart';
+import 'package:firebase/views/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

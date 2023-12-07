@@ -4,7 +4,6 @@ import 'package:firebase/controller/data_provider.dart';
 import 'package:firebase/controller/firebase_provider.dart';
 import 'package:firebase/helpers/textfields.dart';
 import 'package:firebase/model/data_model.dart';
-import 'package:firebase/service/database_service.dart';
 import 'package:firebase/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
