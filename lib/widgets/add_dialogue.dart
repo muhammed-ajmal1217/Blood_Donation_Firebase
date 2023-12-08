@@ -92,17 +92,17 @@ class AddingDialogue extends StatelessWidget {
     );
   }
 
-  addData(BuildContext context) {
+  addData(BuildContext context) async{
     final provider = Provider.of<FirebaseProvider>(context, listen: false);
     final pro=Provider.of<Providers>(context, listen: false);
     final name = nameController.text;
     final age = ageController.text;
     final phone = phoneController.text;
     final group = pro.selectedGroups;
-    final image = pro.file!.path;
-
+    
+    await provider.imageAdder(File(pro.file!.path));
     final data = DataModel(
-        name: name, age: age, phone: phone, group: group, image: image);
+        name: name, age: age, phone: phone, group: group, image: provider.downloadurl);
     provider.addDonator(data);
   }
 }

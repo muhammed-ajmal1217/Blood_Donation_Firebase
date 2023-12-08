@@ -4,7 +4,6 @@ import 'package:firebase/controller/data_provider.dart';
 import 'package:firebase/controller/firebase_provider.dart';
 import 'package:firebase/helpers/textfields.dart';
 import 'package:firebase/model/data_model.dart';
-import 'package:firebase/service/database_service.dart';
 import 'package:firebase/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,6 +24,7 @@ class _EditDialogueState extends State<EditDialogue> {
   TextEditingController ageController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController groupController = TextEditingController();
+  bool clicked = true;
   @override
   void initState() {
     super.initState();
@@ -52,9 +52,7 @@ class _EditDialogueState extends State<EditDialogue> {
                     return CircleAvatar(
                       backgroundColor: Colors.grey,
                       radius: 40,
-                      backgroundImage: snapshot.data != null
-                          ? FileImage(snapshot.data!)
-                          : null,
+                      backgroundImage:!clicked?FileImage(File(provider.file!.path)):NetworkImage(provider.file!.path)as ImageProvider,
                     );
                   },
                 ),
@@ -75,6 +73,7 @@ class _EditDialogueState extends State<EditDialogue> {
                     TextButton(
                       onPressed: () {
                         provider.getCam(ImageSource.gallery);
+                        clicked=!clicked;
                       },
                       child: Text('Gallery'),
                     ),
@@ -98,7 +97,7 @@ class _EditDialogueState extends State<EditDialogue> {
           TextButton(
             child: Text('save'),
             onPressed: () {
-              update();
+              update(widget.donators.image);
               Navigator.of(context).pop();
             },
           ),
@@ -109,21 +108,21 @@ class _EditDialogueState extends State<EditDialogue> {
 
 
 
-  void update() {
+  void update(imageurl)async {
     final provider = Provider.of<FirebaseProvider>(context, listen: false);
     final pro = Provider.of<Providers>(context, listen: false);
     final name = nameController.text;
     final age = ageController.text;
     final phone = phoneController.text;
     final group = pro.selectedGroups;
+   await provider.imageUpdate(imageurl,File( pro.file!.path));
     final updated = DataModel(
         name: name,
         age: age,
         phone: phone,
         group: group,
-        image: pro.file!.path);
+        image:provider.downloadurl);
     provider.updateDonator(widget.id, updated);
-    Navigator.pop(context);
   }
 }
 

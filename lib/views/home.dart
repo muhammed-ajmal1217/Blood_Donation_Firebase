@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/controller/firebase_provider.dart';
 import 'package:firebase/model/data_model.dart';
@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('ui dull');
+    print('ui building from here');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,9 +49,7 @@ class HomePage extends StatelessWidget {
                 return ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundImage: donator.image != null
-                        ? FileImage(File(donator.image!))
-                        : null,
+                    backgroundImage: NetworkImage(donator.image!),
                   ),
                   title: Text(
                     donator.name ?? '',

@@ -37,6 +37,7 @@ class EditDelete extends StatelessWidget {
             title: Text('Delete'),
             onTap: () {
               Provider.of<FirebaseProvider>(context,listen: false).deleteDonator(id);
+              Provider.of<FirebaseProvider>(context,listen: false).deleteImage(donators.image!);
               Navigator.pop(context);
             },
           ),
