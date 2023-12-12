@@ -99,10 +99,10 @@ class AddingDialogue extends StatelessWidget {
     final age = ageController.text;
     final phone = phoneController.text;
     final group = pro.selectedGroups;
-    
     await provider.imageAdder(File(pro.file!.path));
     final data = DataModel(
         name: name, age: age, phone: phone, group: group, image: provider.downloadurl);
     provider.addDonator(data);
+    pro.file=null;
   }
 }

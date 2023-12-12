@@ -7,7 +7,7 @@ class Providers extends ChangeNotifier{
   File? file;
   var selectedGroups='A+';
   ImagePicker image = ImagePicker();
-      Future<void> getCam(ImageSource source) async {
+    Future<void> getCam(ImageSource source) async {
     var img = await image.pickImage(source: source);
       file = File(img!.path);
     notifyListeners();
