@@ -11,8 +11,8 @@ class DatabaseService {
   
   DatabaseService() {
     donorsRef = firestore.collection(todoref).withConverter<DataModel>(
-          fromFirestore: (snapshot, snapshotOptions) => DataModel.fromJson(snapshot.data()!),
-          toFirestore: (data, setOptions) => data.toJson(),
+          fromFirestore: (snapshot, _) => DataModel.fromJson(snapshot.data()!),
+          toFirestore: (data, _) => data.toJson(),
         );
   }
 }
